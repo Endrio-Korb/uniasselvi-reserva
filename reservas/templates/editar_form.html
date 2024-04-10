@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+    <h1 class="tittle text-center">Editar reserva</h1>
+    <div class="container-flex">
+
+        <div class="container-flex-column" id="reserva-atual">
+            <p> Bloco: {{reserva.bloco}}</p>
+            <p>Data: {{reserva.data_reserva|date:"d M Y"}}</p>
+            <p>Periodo: {{reserva.periodo}}</p>
+            <p>{{reserva.laboratorio.nome}}</p>
+            <p>Professor: {{reserva.professor}}</p>
+        </div>
+
+        <div id="nova-reserva">
+            <h2 class="text-erro text-center">{{erro}}</h2>
+
+            {% if request.user.groups.all.0.name == 'Funcionarios' %}
+            <label for="select-htmx">Selecione o Bloco</label>
+            <form method="POST" action='{% url "reservas:editar" id %}'> {% csrf_token %}
+
+                {% comment %} Seleção de bloco {% endcomment %}
+                <select  name="blocos" id='select-htmx'
+                hx-get="{% url "reservas:editar_modules" %}"
+                hx-trigger="change"
+                hx-target="#editar_modules">
+                    <option class='input' selected>Selecione o Bloco</option>
+                    {% for bloco in blocos %}
+                    <option value="{{bloco.id_bloco}}">{{bloco.bloco}}</option>
+                    {% endfor %}
+                </select>
+                
+                <div id="editar_modules">
+                    {% include 'partials/editar_modules.html' %}
+                </div>
+                
+                <button class='btn' id='btn-update' >Atualizar</button>
+            </form>
+            {% else %}
+                <p>'Ocorreu algum problema ou você não tem permissão para acessar essa página'</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:consulta="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ensalamento</title>
+
+    <link rel="stylesheet" href="{% static "/css/style.css" %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@1.9.9"></script>
+    
+</head>
+<body>
+
+  {% comment %} Barra de navegação {% endcomment %}
+  <nav class="nav">
+    <ul class="navbar">
+      {% comment %} Link para reserva do laboratórios {% endcomment %}
+      {% if request.user.groups.all.0.name == 'Funcionarios' %}
+        <li>
+            <a href="{% url "reservas:reserva_form" %}">Registrar Reserva</a>
+        </li>
+      {% endif %}
+      
+      {% comment %} Botão para consulta de reservas {% endcomment %}
+      <li>
+        <a href="{% url "consulta:consulta" %}">Consultar Reserva</a>
+      </li>
+      
+      {% comment %} Nome de usuario ou botão de login {% endcomment %}
+      {% if request.user.is_authenticated  %}
+        <li class='dropdown'>  
+          <a href="#">Olá {{request.user | title}}</a>
+
+          <div class="dropdown-menu">
+            {% comment %} <a href="{% url "usuarios:dados" %}">Meus dados</a> {% endcomment %}
+            <a href="{% url "usuarios:logout" %}">Sair</a>
+          </div>
+        </li>
+      {% else %}
+        <li>
+          <a href="{% url "usuarios:login_form" %}">Entrar</a>
+        </li>
+      {% endif %}
+
+        {% comment %} Link para conversa no whatsapp {% endcomment %}
+      <li  id="">
+        <a id='' href="https://wa.me/+5547984935353?text=Gostaria%20de%20solicitar%20reserva%20de%20um%20laboratorio" target="_blank">
+          <i class="fa-brands fa-whatsapp"></i> Solicitar Reserva</a>
+      </li>
+      
+    </ul>
+    
+    <input type="checkbox" onclick="sidebar()" name="" id="chk-burguer">
+
+    <label for="chk-burguer"><i  id="burguer" class="material-symbols-outlined">
+      menu</i></label>
+
+    <ul class="sidebar">
+      <label for="chk-burguer"><i id="burguer-close" class="material-symbols-outlined">close</i></label>
+     
+      {% comment %} Link para reserva do laboratórios {% endcomment %}
+      {% if request.user.groups.all.0.name == 'Funcionarios' %}
+        <li>
+            <a class='side-item' href="{% url "reservas:reserva_form" %}">Registrar Reserva</a>
+        </li>
+      {% endif %}
+    
+      {% comment %} Botão para consulta de reservas {% endcomment %}
+      <li>
+        <a href="{% url "consulta:consulta" %}">Consultar Reserva</a>
+      </li>
+    
+      {% comment %} Link para conversa no whatsapp {% endcomment %}
+      <li>
+        <a href="https://wa.me/+5547984935353?text=Gostaria%20de%20solicitar%20reserva%20de%20um%20laboratorio" target="_blank">
+          <i class="fa-brands fa-whatsapp"></i> Solicitar Reserva</a>
+      </li>
+
+      {% comment %} Nome de usuario ou botão de login {% endcomment %}
+      {% if request.user.is_authenticated  %}
+      <li class='dropdown menu-item'>  
+        <a href="#">Olá {{request.user | title}}</a>
+        {% comment %} <a href="{% url "usuarios:dados" %}">Meus dados</a> {% endcomment %}
+     
+      </li>
+      <li>
+        <a href="{% url "usuarios:logout" %}">Sair</a>
+      </li>
+      {% else %}
+        <li>
+          <a href="{% url "usuarios:login_form" %}">Entrar</a>
+        </li>
+      {% endif %}
+
+
+    </ul>
+    
+ 
+  </nav>
+
+  {% comment %} Conteudo das outras páginas {% endcomment %}
+  {% block content %}{% endblock content %} 
+    
+
+
+  {% comment %} Link para arquivo JS do projetor {% endcomment %}
+  <script src="{% static 'js/index.js'%}"></script>
+
+  {% comment %} Link para fonte de icones {% endcomment %}
+  <script src="https://kit.fontawesome.com/560af2bb7b.js" crossorigin="anonymous"></script>
+    
+</body>
+</html>

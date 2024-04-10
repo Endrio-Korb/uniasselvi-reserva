@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+   <h1 class="tittle text text-center">Reservar Laboatório</h1>
+   <h2 class="text-erro text-center">{{erro}}</h2>
+   {% comment %} Lista de inputs para registrar uma reserva {% endcomment %}
+   <div class="container-flex-column">
+      <label  for="select-htmx">Selecione o Bloco</label>
+      <div class="row">
+         <div class="col">
+            <form action="{% url "reservas:registrar_reserva" %}" method="POST"> {% csrf_token %}
+               <select  name="blocos" id='select-htmx'
+               hx-get="{% url "reservas:modules" %}"
+               hx-trigger="change"
+               hx-target="#modules">
+               
+               {% comment %} Seleção de bloco {% endcomment %}
+                  <option class='input' selected>Selecione o Bloco</option>
+                  {% for bloco in object_list %}
+                     <option value="{{bloco.id_bloco}}">{{bloco.bloco}}</option>
+                  {% endfor %}
+
+               </select>
+
+               <div id="modules">
+                  {% include 'partials/modules.html' %}
+               </div>
+
+               <input type="submit" class='btn' value='Reservar'>
+            </form>
+
+         </div>
+      </div>
+   </div>
+   
+{% endblock content %}

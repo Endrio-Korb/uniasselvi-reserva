@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container-flex-column">
+        <p class="text text-center">{{erro}}</p>
+        <form  action="{% url 'usuarios:login_user' %}" method="POST"> {% csrf_token %}
+            <div class="container">
+                <input type="text" name="username" class="input" placeholder="Digite seu usuário">
+                <input type="password" name="password" class="input" placeholder="Digite sua senha">
+            </div>
+            <button type="submit" class="btn">Enviar</button>
+        </form>
+        <div>
+            <a href="{% url 'usuarios:pre_registro' %}">Não tenho cadastro</a>
+        </div>
+        <div>
+            <a href="{% url 'password_reset' %}">Recuperar senha</a>
+        </div>
+    </div>
+    
+
+{% endblock content %}

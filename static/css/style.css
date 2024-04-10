@@ -1,0 +1,485 @@
+* {
+    margin:0;
+    box-sizing: border-box;
+}
+body {
+    min-height: 100vh;
+    background-image: url(../img/fundo4.jpg);
+    background-repeat: repeat;
+    background-size: cover;
+}
+
+.text-table {
+    color: black;
+}
+.tittle,
+.text {
+    color: black;
+    font-size: 1.5em;
+}
+
+.tittle {
+    font-size: 3em;
+}
+
+.text-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-erro {
+    color:red;
+}
+
+.sucesso,
+.erro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+}
+
+.mensagem_sucesso,
+.mensagem_erro {
+    display: flex;
+    text-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    color: white;
+    text-shadow: 1px 1px 1x black;
+    padding: 5px;
+    border-radius: 10px;
+    margin-bottom: 50px;
+}
+
+.mensagem_erro {
+    font-size: 1.75em;
+    background-color: red;
+    border: 5px solid rgb(175, 1, 1);
+}
+
+.mensagem_sucesso {
+    font-size: 2em;
+    background-color:rgb(0, 138, 0) ;
+    border: 5px solid rgb(1, 94, 1);
+}
+
+/* Containers */
+.grid-container-table {
+    display: grid;
+    grid-template-areas: "table";
+    grid-template-columns: 1fr;
+}
+
+.container-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-message {
+    max-width: 800px;
+}
+
+#nova-reserva,
+#reserva-atual {
+    margin: 5px;
+}
+
+#reserva-atual {
+    row-gap: 35px;
+}
+
+
+#btn-update {
+    transform: translate(-110px);
+}
+
+/*  Inputs */
+input {
+    width: 200px;
+    height: 30px;
+    text-align: center;
+}
+
+select {
+    width: 200px;
+    height: 30px;
+}
+
+#select-htmx {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.input {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+/* Barra de Navegação */
+.nav .navbar li {
+    display: inline-block;
+}
+
+.nav .navbar li a {
+    display: inline-block;
+    color: black;
+    text-decoration: none;
+    padding: 15px;
+}
+
+.nav .navbar li a:hover {
+    background-color: lightgray;
+}
+
+/* Barra de navegação mobile */
+i#burguer {
+    display: none;
+}
+
+#chk-burguer {
+    display: none;
+}
+.nav .sidebar {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left:-100%;
+    overflow-x: hidden;
+    display: none;
+}
+
+
+
+.nav .sidebar{
+    list-style: none;
+    width: 200px;
+}
+
+.nav .sidebar #burguer-close {
+    color: white;
+}
+
+.nav .sidebar li a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    font-size: 1.75em;
+    border-radius: 10px;
+}
+
+.nav .sidebar li a:hover {
+    background-color: rgb(78, 78, 78);
+    border-radius: 10px;
+}
+
+.nav .sidebar.active {
+    display: block;
+    left: 0;
+    width: 100vh;
+    height: 100vh;
+    background-color: rgb(30, 30, 30);
+    transition: 3s ease;
+}
+
+
+
+.dropdown-menu {
+    position: absolute;
+    box-shadow: 0 0 2px black;
+    display: none;
+}
+
+.dropdown-menu a {
+    display: block;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    background-color: #949494;
+    border-radius: 10px;
+}
+
+
+
+
+#link_whatsapp {
+    text-decoration: none;
+    font-size: 1.5em;
+    color: white;
+    
+}
+
+/* Botões */
+.btn {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    display: block;
+    color:black;
+    background-color:rgb(250, 250, 70);
+    border: 1px solid black;
+    height: 25px;
+    width: 100px;
+    border-radius: 10rem;
+    font-size: 1em;
+
+    transition: transform 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+/* Adiciona um espaço entre o painel e a barra de seleção de lado */
+.espaco-painel {
+    position: relative;
+    min-width: 1000px;
+    max-width: 100%;
+    height: 400px;
+    transform-style: preserve-3d;
+    margin-top: 60px;
+    perspective: 800px;
+}
+
+/* Define o tamanho do painel e a posição do mesmo */
+.painel {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-style: preserve-3d;
+    transition: 0.6s ease;
+}
+
+/* Parte que define o tamanho da div para frente e verso */
+.frente,
+.verso {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 6px;
+    left: 0;
+    top: 0;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+/*  Define a rotação para a pagina verso */
+.verso {
+    transform: rotateY(180deg);
+}
+
+/* Altera o css dos elementos dentro do painel */
+.conteudo-painel {
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+/*  Esconde o quadrado do checkbox */
+.checkbox:checked,
+.checkbox:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+
+/* Faz uma barra para a label para simular um seletor */
+.checkbox:checked + label,
+.checkbox:not(:checked) + label {
+    position: relative;
+    display: block;
+    width: 60px;
+    height: 16px;
+    border-radius: 8px;
+    padding: 0;
+    margin: 10px auto;
+    cursor: pointer;
+    background-color: black;
+}
+
+/* Faz uma bola que sobrepoe a barra da label para indicar qual lado está selecionado */
+.checkbox:checked + label::before,
+.checkbox:not(:checked) + label::before {
+    content: "<";
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    display: block;
+    width: 36px;
+    height: 36px;
+    border-radius: 60%;
+    background-color: yellow;
+    z-index: 20;
+    transition: 0.5s ease;
+    font-size: 2em;
+    transform: rotate(-310deg);
+}
+
+/* Faz a bola de seleção se mover para o lado que esta selecionado */
+.checkbox:checked + label::before {
+    transform: translateX(44px) rotate(-240deg);
+}
+
+/* Faz o painel de mover sempre que o status da checkbox muda */
+.checkbox:checked ~ .espaco-painel .painel {
+    transform: rotateY(180deg);
+}
+
+/* Altera text indicado de seleção */
+.reservados,
+.disponiveis {
+    font-size: 1.5em;
+    opacity: 50%;
+}
+
+.seletor {
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+}
+
+.seletor .destaque {
+    font-size: 2em;
+    opacity: 100%;
+}
+
+/* Tabela */
+table, th, td {
+    border: 1px solid black;
+    color: black;
+}
+
+table {
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+table td {
+    border: 1px solid black;
+}
+    
+th, td{
+    border: none;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+
+th{
+    font-weight: bold;
+}
+
+table .lista_reservados:hover:nth-child(1n + 2),
+table .lista_reservados:hover:nth-child(1n + 2) .text {
+    background-color:lightgray;
+}
+
+table .lista_disponiveis:hover:nth-child(1n + 1), 
+table .lista_disponiveis:hover:nth-child(1n + 1) .text {
+    background-color: lightgray;
+}
+td {
+    width: 500px;
+    text-align: center;
+}
+
+table .lista_reservados .lab {
+    width: 600px;
+}
+tr .periodo {
+    width: 130px;
+} 
+
+tr #acoes {
+    max-width: 50px;
+}
+
+tr .icons {
+    font-size: 1.5rem;
+}
+
+/* Titulos */
+h1 {
+    font-size: 2em;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+@media  screen and (max-width:480px) {
+
+    /* Mostrar botão da navegação lateral */
+    .nav .sidebar {
+        left: 0;
+    }
+    .nav .navbar {
+        display: none;
+    }
+    i#burguer {
+        display: block;
+    }
+    
+    .tittle {
+        font-size: 1.5em;
+    }
+
+
+    /* Alterando propriedades dos elementos da tabela de lab. reserva e disponiveis */
+    .espaco-painel {
+        width: 650px;
+    }
+    .text {
+        font-size: 0.75em;
+    }
+    .text-table {
+        font-size: 0.75em;
+    }
+    .lista_reservados .reserva {
+        width: 100px;
+    }
+    .lista_reservados td {
+        width: 100px;
+    }
+    tr {
+        max-width: 650px;
+    }
+    td {
+        max-width: 200px;
+    }
+    tr #acoes {
+        max-width: 50px;
+    }
+    
+    tr .icons {
+        font-size: 0.7rem;
+    }
+    .container-message {
+        max-width: 350px;
+    }
+
+    .message {
+        font-size: 1em;
+    }
+}

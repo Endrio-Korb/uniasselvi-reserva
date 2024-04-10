@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form method="post">
+                    {% csrf_token %}
+                
+                    <p class='text text-center'>Você tem certeza que quer cancelar:</p>
+                    <p class='text text-center'>{{reserva.laboratorio.nome}} {{laboratorio.bloco}}{{labotorio.numero_sala}}</p>
+                    <p class='text text-center'> do {{reserva.professor}}
+                    <p class="text text-center"> do dia  {{reserva.data_reserva}}</p>
+                    <p class="text text-center"> no periodo {{reserva.periodo}}? </p>
+
+                    <button class='btn'>Excluir</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+ 
+
+
+
+{% endblock content %}

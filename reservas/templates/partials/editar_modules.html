@@ -1,0 +1,32 @@
+   {% load static %}
+   
+   <!-- Data da Reserva -->
+   <label for="data">Selecione a data</label>
+   <input id='data' class='input data-module'type="date" name="data">
+
+   <!-- Periodos -->
+   <label for="periodo">Selecione o periodo</label>
+   <select id='periodo' class='input' name="periodo" >
+      <option selected>Selecione o Periodo</option>
+      {% for periodo in periodos %}
+         <option value="{{periodo.id}}">{{periodo.nome_periodo}}</option>
+      {% endfor %}
+   </select>
+
+   <!-- Laboratórios -->
+   <label for="laboratorio">Selecione o Laboratorio</label>
+   <select id='laboratorio' class='input' name="lab" id="">
+      <option selected>Selecione o Laboratório</option>
+      {% for lab in laboratorios %}
+         <option value="{{lab.id}}">{{lab.nome}} {{lab.bloco}}{{lab.numero_sala}}</option>
+      {% endfor %}
+   </select>
+ 
+ <!-- Nome Professor -->
+   <label for="professor">Digite o nome do professor</label>
+   <input id='professor' class='input' type="text" name='professor' placeholder="Nome do professor" list='lista_professores'>
+   <datalist id='lista_professores'>
+         {% for professor in professores %}
+            <option value="{{professor.nome}}"></option>
+         {% endfor %}
+   </datalist>   

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    {% comment %} Mostra lista de reservas {% endcomment %}
+    {% if labs_reservados %}
+        <div class="container text-center">
+            <div class="row">
+                <div class="col">
+                        <h1 class='tittle text-center text' name="data">Data {{data}}</h1>
+                        <h1 class='tittle text-center text'>Laboratórios Reservados</h1>
+                        {% if labs_reservados %}
+                        <table>
+                            {% for item in labs_reservados %}
+                                <tr>
+                                    <td class='text text-center'>{{item}}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                        {% else %}
+                            <p class="text text-center">Não á reservas para esse professor</p>
+                        {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% comment %} Exibe mensagem informando que não há laboratório reservados {% endcomment %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <p class="text text-center">{{mensagem}}</p>
+            </div>
+        </div>
+    </div>
+
+ 
+
+{% endblock content %}

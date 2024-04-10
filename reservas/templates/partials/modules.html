@@ -1,0 +1,56 @@
+{% load static %}
+
+   <!-- Data da Reserva -->
+   <div class="container">
+      <label for="data">Selecione a data</label>
+      <div class="row">
+         <div class="col">
+            <input id='data' class='input data-module'type="date" name="data">
+         </div>
+      </div>
+   </div>
+
+   <!-- Periodos -->
+   <div class="container">
+      <label for="periodo">Selecione o periodo</label>
+      <div class="row">
+         <div class="col">
+            <select id='periodo' class='input' name="periodo" >
+            <option selected>Selecione o Periodo</option>
+            {% for periodo in periodos %}
+               <option value="{{periodo.id}}">{{periodo.nome_periodo}}</option>
+            {% endfor %}
+            </select>
+         </div>
+      </div>
+   </div>
+
+   <!-- Laboratórios -->
+   <div class="container">
+      <label for="laboratorio">Selecione o Laboratorio</label>
+      <div class="row">
+         <div class="col">
+            <select id='laboratorio' class='input' name="nome_lab" id="">
+               <option selected>Selecione o Laboratório</option>
+               {% for lab in laboratorios %}
+                  <option value="{{lab.id}}">{{lab.nome}} {{lab.bloco}}{{lab.numero_sala}}</option>
+               {% endfor %}
+            </select>
+         </div>
+      </div>
+   </div>
+
+   <!-- Nome Professor -->
+   <div class="container">
+      <label for="professor">Digite o nome do professor</label>
+      <div class="row">
+         <div class="col">
+            <input id='professor' class='input' type="text" name='nome_professor' placeholder="Nome do professor" list='lista_professores'>
+            <datalist id='lista_professores'>
+                  {% for professor in professores %}
+                     <option value="{{professor.nome}}"></option>
+                  {% endfor %}
+            </datalist>   
+         </div>
+      </div>
+   </div>  

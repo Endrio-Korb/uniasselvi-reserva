@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {{messages.message}}
+    {% comment %} Mensagem de erro {% endcomment %}
+    {% if erro %}
+        <div class="container-flex">
+            <div class="row">
+                <div class="erro">
+                    <p class='mensagem_erro'>{{erro}}</p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% comment %} Mensagem de sucesso {% endcomment %}
+    {% if sucesso %}
+        <div class="container-flex">
+            <div class="row">
+                <div class="sucesso">
+                    <p class="mensagem_sucesso">{{sucesso}}</p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% comment %} Consulta ensalamento por bloco e data{% endcomment %}
+    <section>
+        <div class="container-flex-column">
+            <h1 class="tittle text-center">Consulta por Bloco</h1>
+            <form action="{% url 'consulta:ensalamento_labs' %}" method="POST"> {% csrf_token %}
+                <div class="container">
+                    <input class="input" type="date" id='data' name="data" placeholder='Selecione a data'>
+                    <select id='bloco1' class="input" name="bloco" >
+                        <option Selected>Selecione o Bloco</option>
+                        {% for bloco in blocos %}
+                        <option value="{{bloco.id_bloco}}">{{bloco.bloco}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type='submit' class='btn'>Consultar</button>
+            </form>  
+        </div>
+    </section>
+
+    {% comment %} Consulta por nome do professor e data{% endcomment %}
+    <section>
+        <div class="container-flex-column">
+            <h1 class="tittle text-center">Consulta por Nome do Professor</h1>
+            <form action="{% url "consulta:ensalamento_labs_nome" %}" method='POST'> {% csrf_token %}
+                <div class="container">
+                    <input class="input" type="text" name='nome_professor' placeholder='Digite o nome do professor'>
+                    <input class="input" type="date" name="data">
+                </div>
+                <button type='submit' class="btn">Consultar</button>
+            </form>
+        </div>
+</section>
+        
+        
+        
+{% endblock content %}
