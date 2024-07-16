@@ -1,63 +1,142 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block content %}
-    {{messages.message}}
-    {% comment %} Mensagem de erro {% endcomment %}
-    {% if erro %}
-        <div class="container-flex">
-            <div class="row">
-                <div class="erro">
-                    <p class='mensagem_erro'>{{erro}}</p>
-                </div>
+
+
+    <div class="container-flex">
+        <div class="row">
+            <div class="container-flex">
+                <h1 class='tittle ' name="bloco">Bloco {{nome_bloco}}</h1>
+                <h1 class='tittle ' name="data">Data {{data}}</h1>
             </div>
-        </div>
-    {% endif %}
-
-    {% comment %} Mensagem de sucesso {% endcomment %}
-    {% if sucesso %}
-        <div class="container-flex">
-            <div class="row">
-                <div class="sucesso">
-                    <p class="mensagem_sucesso">{{sucesso}}</p>
-                </div>
+            {% comment %} Checbox para exibir laboratório reservados ou disponíveis {% endcomment %}
+            <div class="seletor">
+                <p class='reservados destaque' id="reservados">Reservados</p>
+                <p class='disponiveis' id="disponiveis">Disponiveis</p>
             </div>
-        </div>
-    {% endif %}
+            <input type="checkbox" name="checkbox" id="checkbox-field" class="checkbox">
+            <label for="checkbox-field" class="checkbox-label"></label>
 
-    {% comment %} Consulta ensalamento por bloco e data{% endcomment %}
-    <section>
-        <div class="container-flex-column">
-            <h1 class="tittle text-center">Consulta por Bloco</h1>
-            <form action="{% url 'consulta:ensalamento_labs' %}" method="POST"> {% csrf_token %}
-                <div class="container">
-                    <input class="input" type="date" id='data' name="data" placeholder='Selecione a data'>
-                    <select id='bloco1' class="input" name="bloco" >
-                        <option Selected>Selecione o Bloco</option>
-                        {% for bloco in blocos %}
-                        <option value="{{bloco.id_bloco}}">{{bloco.bloco}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <button type='submit' class='btn'>Consultar</button>
-            </form>  
-        </div>
-    </section>
+            {% comment %} Espaço onde irá aparecer a lista de laboratório reservados e disponveis {% endcomment %}
+            <div class="espaco-painel">
+                <form action="{% url 'reservas:registrar_reserva' %}" method="POST"> {% csrf_token %}
+                    <div class="painel">
+                            {% comment %} Frente onde exibe lista de laboratório reservados caso possua alguma reserva {% endcomment %}
+                            <div class="frente">
+                                <div class="conteudo-painel">
+                                    <div class="container-flex">
 
-    {% comment %} Consulta por nome do professor e data{% endcomment %}
-    <section>
-        <div class="container-flex-column">
-            <h1 class="tittle text-center">Consulta por Nome do Professor</h1>
-            <form action="{% url "consulta:ensalamento_labs_nome" %}" method='POST'> {% csrf_token %}
-                <div class="container">
-                    <input class="input" type="text" name='nome_professor' placeholder='Digite o nome do professor'>
-                    <input class="input" type="date" name="data">
-                </div>
-                <button type='submit' class="btn">Consultar</button>
-            </form>
+                                        {% if labs_reservados %}
+                                            <table>
+                                                {% if request.user.groups.all.0.name == 'Funcionarios' %}
+                                                    <tr>
+                                                        <th class='text text-table'>Professor</th>
+                                                        <th class='text text-table'>Laboratório</th>
+                                                        <th class='text text-table'>Periodo</th>
+                                                        <th class="text text-table">Ações</th>
+                                                    </tr>
+                                                    {% for lab in labs_reservados %}
+                                                    <tr class='lista_reservados'>
+                                                        <td class='reserva text-table'>{{lab.professor.nome}}</td>
+                                                        <td class='reserva lab text-table'>{{lab.laboratorio.nome}} {{lab.bloco}}{{lab.laboratorio.numero_sala}}</td>
+                                                        <td class='reserva text-table'>{{lab.periodo.nome_periodo}}</td>
+                                                        <td id='acoes'>
+                                                            <a class="icons" href="{% url "reservas:editar_form" lab.id %}"><i class="fa-regular fa-pen-to-square"></i></a>
+                                                            <a class="icons" href="{% url "reservas:cancelar_form" lab.id %}"><i class="fa-regular fa-trash-can"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    <tr>
+                                                        <th class='text text-table'>Professor</th>
+                                                        <th class='text text-table'>Laboratório</th>
+                                                        <th class='text text-table'>Periodo</th>
+                                                    </tr>
+                                                    {% for lab in labs_reservados %}
+                                                    <tr class='lista_reservados'>
+                                                        <td class='text text-table'>{{lab.professor.nome}}</td>
+                                                        <td class='lab text text-table'>{{lab.laboratorio.nome}} {{lab.bloco}}{{lab.laboratorio.numero_sala}}</td>
+                                                        <td class='text text-table'>{{lab.periodo.nome_periodo}}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </table>
+                                        {% else %}
+                                            <p class="text text-center">Não há nenhum laboratório reservado</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                       
+
+                            {% comment %} Verso onde exibe lista de laboratórios disponíveis caso possua algum {% endcomment %}
+                            <div class="verso">
+                                <div class="conteudo-painel">
+                                    <table>
+                                        <tr>
+                                            <th><p class="text text-center">Laboratórios</p></th>
+                                            <th><p class="text text-center">Periodos</p></th>
+                                        </tr>
+                                    </table>
+                                </div>
+                                    
+                                <div class="conteudo-painel">
+                                    {% if labs_disponiveis_noturno %}
+                                        <table>
+                                            {% for lab in labs_disponiveis_noturno %}
+                                                <tr class='lista_disponiveis'>
+                                                    <td class="text text-table">{{lab}}</td>
+                                                    <td class="periodo text text-table">Noturno</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </table>
+                                    {% else %}
+                                        <table>
+                                            <td><p class='text-center'>Não há nenhum laboratório dispónivel no periodo Noturno</p></td>
+                                        </table>
+                                    {% endif %}
+                                </div>
+
+                                <div class="conteudo-painel">
+                                    {% if labs_disponiveis_vespertino %}
+                                        <table>
+                                            {% for lab in labs_disponiveis_vespertino %}
+                                                <tr class='lista_disponiveis'>
+                                                    <td class="text text-table">{{lab}}</td>
+                                                    <td class="periodo text text-table">Vespertino</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </table>
+                                    {% else %}
+                                        <table>
+                                            <td><p class='text-center'>Não há nenhum laboratório dispónivel no periodo Vespertino</p></td>
+                                        </table>
+                                    {% endif %}
+                                </div>
+
+                                <div class="conteudo-painel">
+                                    {% if labs_disponiveis_matutino %}
+                                        <table>
+                                            {% for lab in labs_disponiveis_matutino %}
+                                                <tr class='lista_disponiveis'>
+                                                    <td class="text text-table">{{lab}}</td>
+                                                    <td class="periodo text text-table">Matutino</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </table>
+                                    {% else %}
+                                        <table>
+                                            <td><p class='text-center'>Não há nenhum laboratório dispónivel no periodo Matutino</p></td>
+                                        </table>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>   
         </div>
-</section>
-        
-        
-        
+    </div>
+
+
 {% endblock content %}
