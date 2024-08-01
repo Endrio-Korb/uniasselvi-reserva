@@ -6,8 +6,10 @@
         <p class="text text-center">{{erro}}</p>
         <form  action="{% url 'usuarios:login_user' %}" method="POST"> {% csrf_token %}
             <div class="container">
-                <input type="text" name="username" class="input" placeholder="Digite seu usuário">
-                <input type="password" name="password" class="input" placeholder="Digite sua senha">
+                <label class='text text-center' for='username'>Nome de usuario</label>
+                <input type="text" id="username" name="username" class="input" placeholder="Digite seu usuário">
+                <label class='text text-center' for='password'>Senha</label>
+                <input type="password" id="password" name="password" class="input" placeholder="Digite sua senha">
             </div>
             <button type="submit" class="btn">Enviar</button>
         </form>

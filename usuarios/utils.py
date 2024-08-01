@@ -5,7 +5,7 @@ def enviar_email(pre_registro):
         Você recebeu esse e-mail pois você ou alguém o cadastrou na escola de cursos. Caso queira confirmar o cadastro, clique no link a seguir.
         Caso não tenha sido você, apenas ignore esse e-mail.
 
-        http://127.0.0.1:8000/auth/confirmacao?id={pre_registro.uuid}
+        https://uniasselvireserva.com.br//auth/confirmacao?id={pre_registro.uuid}
     
     """
 
