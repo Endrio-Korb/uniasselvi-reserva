@@ -33,7 +33,7 @@
       {% comment %} Nome de usuario ou botão de login {% endcomment %}
       {% if request.user.is_authenticated  %}
         <li class='dropdown'>  
-          <a href="#">Olá {{request.user | title}}</a>
+          <a href="#">Olá  {{request.user.first_name | title}}</a>
 
           <div class="dropdown-menu">
             {% comment %} <a href="{% url "usuarios:dados" %}">Meus dados</a> {% endcomment %}
