@@ -39,6 +39,7 @@ class Laboratorios(models.Model):
 
 class ReservasLaboratorios(models.Model):
 
+    id = models.AutoField(primary_key=True)
     periodo = models.ForeignKey(Periodos, on_delete=models.CASCADE)
     bloco = models.ForeignKey(Blocos, on_delete=models.CASCADE)
     data_reserva = models.DateField(null=False, blank=False)

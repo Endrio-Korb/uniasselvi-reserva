@@ -15,7 +15,7 @@
                     <p class="text text-center"> do dia  {{reserva.data_reserva}}</p>
                     <p class="text text-center"> no periodo {{reserva.periodo}}? </p>
 
-                    <button class='btn'>Excluir</button>
+                    <a class="btn text text-center" href="{% url "reservas:cancelar_reserva" reserva.id %}">Cancelar</a>
                 </form>
 
             </div>

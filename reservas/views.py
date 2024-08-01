@@ -104,21 +104,31 @@ def registrarReservarLaboratorio(request):
 
 
 # Apagar uma reserva do banco de dados
-class CancelarForm(GroupRequiredMixin, DeleteView):
-    group_required = u'Funcionarios'
-    model = ReservasLaboratorios
-    context_object_name = 'reserva'
-    template_name = 'cancelar.html'
-    success_url = reverse_lazy('consulta:consulta')
+def cancelar_form(request, id):
+    reserva = ReservasLaboratorios.objects.get(id=id)
+    return render(request, 'cancelar.html', {'reserva':reserva})
+
+def cancelar_reserva(request,id):
+    reserva = ReservasLaboratorios.objects.filter(id=id)
+    reserva.delete()
+    blocos = Blocos.objects.all()
+    return render(request, 'consulta.html', {'blocos':blocos})
+
+# class CancelarForm(GroupRequiredMixin, DeleteView):
+#     group_required = u'Funcionarios'
+#     model = ReservasLaboratorios
+#     context_object_name = 'reserva'
+#     template_name = 'cancelar.html'
+#     success_url = reverse_lazy('consulta:consulta')
 
 
 # Editar reserva do banco de dados
-def editar_form(request, pk):
+def editar_form(request, id):
     usuario = request.user
-    id = pk
+   # id = pk
     if usuario.groups.filter(name='Funcionarios').exists():
         blocos = Blocos.objects.all()
-        reserva = ReservasLaboratorios.objects.get(pk=pk)
+        reserva = ReservasLaboratorios.objects.get(id=id)
         context =  {'reserva':reserva, 'id': id, 'blocos':blocos}
         return render(request, 'editar_form.html',context)
     else:
@@ -137,7 +147,7 @@ def editar_modules(request):
     return render(request, 'partials/editar_modules.html', contexto)
 
 
-def editar(request, pk):
+def editar(request, id):
     
     if request.method == 'POST':
         professor = request.POST.get('professor')
@@ -151,7 +161,7 @@ def editar(request, pk):
 
         if verificarReserva(lab, bloco, periodo, data):
             if verificarReserva(lab, bloco, periodo, data):
-                id = pk
+                #id = pk
                 nome_lab = Laboratorios.objects.get(id=lab)
                 str_periodo = Periodos.objects.get(id=periodo)
                 erro = f'{nome_lab.nome} já está reservado no periodo {str_periodo} para data {data} '
@@ -163,7 +173,7 @@ def editar(request, pk):
                 nome = f'{professor}')
                 salva_nome_professor.save()
 
-            ReservasLaboratorios.objects.filter(pk=pk).update(data_reserva=data,
+            ReservasLaboratorios.objects.filter(id=id).update(data_reserva=data,
                                                             periodo_id = Periodos.objects.get(id_periodo=periodo),
                                                             laboratorio = Laboratorios.objects.get(id=lab),
                                                             bloco_id = Blocos.objects.get(id_bloco=bloco),

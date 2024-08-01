@@ -77,31 +77,40 @@
                                             <th><p class="text text-center">Laboratórios</p></th>
                                             <th><p class="text text-center">Periodos</p></th>
                                         </tr>
-                                        {% if labs_disponiveis_noturno %}
+                                    </table>
+                                </div>
+                                    
+                                <div class="conteudo-painel">
+                                    {% if labs_disponiveis_noturno %}
+                                        <table>
                                             {% for lab in labs_disponiveis_noturno %}
                                                 <tr class='lista_disponiveis'>
                                                     <td class="text text-table">{{lab}}</td>
                                                     <td class="periodo text text-table">Noturno</td>
                                                 </tr>
                                             {% endfor %}
-                                        {% else %}
-                                            <p class='text-center'>Não há nenhum laboratório dispónivel no periodo matutino</p>
-                                        {% endif %}
-                                    </table>
+                                        </table>
+                                    {% else %}
+                                        <table>
+                                            <td><p class='text-center'>Não há nenhum laboratório dispónivel no periodo Noturno</p></td>
+                                        </table>
+                                    {% endif %}
                                 </div>
 
                                 <div class="conteudo-painel">
                                     {% if labs_disponiveis_vespertino %}
-                                    <table>
-                                        {% for lab in labs_disponiveis_vespertino %}
-                                            <tr class='lista_disponiveis'>
-                                                <td class="text text-table">{{lab}}</td>
-                                                <td class="periodo text text-table">Vespertino</td>
-                                            </tr>
-                                        {% endfor %}
-                                    </table>
+                                        <table>
+                                            {% for lab in labs_disponiveis_vespertino %}
+                                                <tr class='lista_disponiveis'>
+                                                    <td class="text text-table">{{lab}}</td>
+                                                    <td class="periodo text text-table">Vespertino</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </table>
                                     {% else %}
-                                        <p class='text-center'>Não há nenhum laboratório dispónivel no periodo matutino</p>
+                                        <table>
+                                            <td><p class='text-center'>Não há nenhum laboratório dispónivel no periodo Vespertino</p></td>
+                                        </table>
                                     {% endif %}
                                 </div>
 
@@ -116,7 +125,9 @@
                                             {% endfor %}
                                         </table>
                                     {% else %}
-                                        <p class='text-center'>Não há nenhum laboratório dispónivel no periodo matutino</p>
+                                        <table>
+                                            <td><p class='text-center'>Não há nenhum laboratório dispónivel no periodo Matutino</p></td>
+                                        </table>
                                     {% endif %}
                                 </div>
                             </div>
