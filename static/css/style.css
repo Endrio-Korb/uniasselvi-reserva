@@ -3,18 +3,15 @@
     box-sizing: border-box;
 }
 body {
-    min-height: 100vh;
-    background-image: url(../img/fundo4.jpg);
-    background-repeat: repeat;
-    background-size: cover;
+    background-color: grey;
 }
 
 .text-table {
-    color: black;
+    color: white;
 }
 .tittle,
 .text {
-    color: black;
+    color: white;
     font-size: 1.5em;
 }
 
@@ -54,81 +51,12 @@ body {
     margin-bottom: 50px;
 }
 
-.mensagem_erro {
-    font-size: 1.75em;
-    background-color: red;
-    border: 5px solid rgb(175, 1, 1);
-}
-
-.mensagem_sucesso {
-    font-size: 2em;
-    background-color:rgb(0, 138, 0) ;
-    border: 5px solid rgb(1, 94, 1);
-}
-
-/* Containers */
-.grid-container-table {
-    display: grid;
-    grid-template-areas: "table";
-    grid-template-columns: 1fr;
-}
-
-.container-flex {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.container-flex-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.container-message {
-    max-width: 800px;
-}
-
-#nova-reserva,
-#reserva-atual {
-    margin: 5px;
-}
-
-#reserva-atual {
-    row-gap: 35px;
-}
-
-
-#btn-update {
-    transform: translate(-110px);
-}
-
-/*  Inputs */
-input {
-    width: 200px;
-    height: 30px;
-    text-align: center;
-}
-
-select {
-    width: 200px;
-    height: 30px;
-}
-
-#select-htmx {
-    margin-top: 10px;
-    margin-bottom: 5px;
-}
-
-.input {
-    display: flex;
-    align-content: center;
-    align-items: center;
-    margin-bottom: 5px;
-}
 
 /* Barra de Navegação */
+.nav {
+    margin-bottom: 50px;
+}
+
 .nav .navbar li {
     display: inline-block;
 }
@@ -221,27 +149,6 @@ i#burguer {
     font-size: 1.5em;
     color: white;
     
-}
-
-/* Botões */
-.btn {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5px;
-    display: block;
-    color:black;
-    background-color:rgb(250, 250, 70);
-    border: 1px solid black;
-    height: 25px;
-    width: 100px;
-    border-radius: 10rem;
-    font-size: 1em;
-
-    transition: transform 0.3s;
-}
-
-.btn:hover {
-    transform: translateY(-3px);
 }
 
 /* Adiciona um espaço entre o painel e a barra de seleção de lado */
@@ -363,69 +270,20 @@ i#burguer {
     opacity: 100%;
 }
 
-/* Tabela */
-table, th, td {
-    border: 1px solid black;
-    color: black;
+.container {
+    width: min(800px, 90%);
+    display: grid;
+    justify-content: center;
+    margin: auto;
 }
 
-table {
-    border-collapse: collapse;
-    margin-bottom: 10px;
-}
-table td {
-    border: 1px solid black;
-}
-    
-th, td{
-    border: none;
-    padding: 10px;
+.container input, label, select {
     text-align: center;
-    font-size: 1.5em;
+    padding: 5px;
+    border-radius: 5px;
+    width: 200px;
 }
 
-
-th{
-    font-weight: bold;
-}
-
-table .lista_reservados:hover:nth-child(1n + 2),
-table .lista_reservados:hover:nth-child(1n + 2) .text {
-    background-color:lightgray;
-}
-
-table .lista_disponiveis:hover:nth-child(1n + 1), 
-table .lista_disponiveis:hover:nth-child(1n + 1) .text {
-    background-color: lightgray;
-}
-td {
-    width: 500px;
-    text-align: center;
-}
-
-table .lista_reservados .lab {
-    width: 600px;
-}
-tr .periodo {
-    width: 130px;
-} 
-
-tr #acoes {
-    max-width: 50px;
-}
-
-tr .icons {
-    font-size: 1.5rem;
-}
-
-/* Titulos */
-h1 {
-    font-size: 2em;
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
 
 
 @media  screen and (max-width:480px) {
