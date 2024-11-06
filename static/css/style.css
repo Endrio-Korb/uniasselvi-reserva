@@ -3,19 +3,21 @@
     box-sizing: border-box;
 }
 body {
-    background-color: grey;
+    background-image: url("../img/backgroud.jfif");
+    background-repeat: repeat;
+
 }
 
-.text-table {
+.text, .tittle {
     color: white;
 }
-.tittle,
-.text {
-    color: white;
+
+.text{
     font-size: 1.5em;
 }
 
 .tittle {
+    margin-top: 10px;
     font-size: 3em;
 }
 
@@ -282,6 +284,15 @@ i#burguer {
     padding: 5px;
     border-radius: 5px;
     width: 200px;
+}
+
+button {
+    margin: 10px;
+    border-radius: 10px;
+    font-size: 1.25em;
+    background-color: blueviolet;
+    border: 1px solid white;
+    color: white;
 }
 
 

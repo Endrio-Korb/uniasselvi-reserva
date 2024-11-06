@@ -28,15 +28,15 @@
     {% comment %} Consulta ensalamento por bloco e data{% endcomment %}
     <section>
         <div class="container">
-            <h1 class="">Consulta por Bloco</h1>
+            <h1 class="tittle">Consulta por Bloco</h1>
         </div>
         <form action="{% url 'consulta:ensalamento_labs' %}" method="POST"> {% csrf_token %}
             <div class="container">
-                <label class='' for="data">Selecione a data</label>
+                <label class="text" for="data">Selecione a data</label>
                 <input class="input" type="date" id='data' name="data">
             </div>
             <div class="container">
-                <label class='' for="bloco1">Selecione o bloco</label>
+                <label class="text" for="bloco1">Selecione o bloco</label>
                 <select id='bloco1' class="input" name="bloco" >
                     <option Selected>Selecione o Bloco</option>
                     {% for bloco in blocos %}
@@ -51,16 +51,16 @@
     {% comment %} Consulta por nome do professor e data{% endcomment %}
     <section>
         <div class="container">
-            <h1 class="">Consulta por Nome do Professor</h1>
+            <h1 class="tittle">Consulta por Nome do Professor</h1>
         </div>
             <form action="{% url "consulta:ensalamento_labs_nome" %}" method='POST'> {% csrf_token %}
                 <div class="container">
-                    <label class="" for="nome">Nome do Professor</label>
-                    <input class="" type="text" id="nome" name='nome_professor' placeholder='Nome do Professor'>
+                    <label class="text" for="nome">Nome do Professor</label>
+                    <input class="input" type="text" id="nome" name='nome_professor' placeholder='Nome do Professor'>
                 </div>
                 <div class="container">
-                    <label class="" for="data2">Selecione a data</label>
-                    <input class="" id="data2" type="date" name="data">
+                    <label class="text" for="data2">Selecione a data</label>
+                    <input class="input" id="data2" type="date" name="data">
                     <button type='submit' class="btn">Consultar</button>
                 </div>
             </form>
