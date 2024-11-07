@@ -19,6 +19,7 @@ body {
 .tittle {
     margin-top: 10px;
     font-size: 3em;
+    text-align: center;
 }
 
 .text-center {
@@ -59,18 +60,23 @@ body {
     margin-bottom: 50px;
 }
 
-.nav .navbar li {
-    display: inline-block;
+.nav .navitens {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 15px;
 }
 
-.nav .navbar li a {
-    display: inline-block;
-    color: black;
+.nav .navitens li a {
+    color: white;
     text-decoration: none;
     padding: 15px;
+    margin: 15px;
+    align-items: center;
+    justify-content: center;
 }
 
-.nav .navbar li a:hover {
+.nav .navitens li a:hover {
     background-color: lightgray;
 }
 
@@ -118,11 +124,12 @@ i#burguer {
 
 .nav .sidebar.active {
     display: block;
+    margin-top: 0px;
     left: 0;
     width: 100vh;
     height: 100vh;
-    background-color: rgb(30, 30, 30);
-    transition: 3s ease;
+    background-color: rgb(53 40 120);
+    padding-top: 20px;
 }
 
 
@@ -297,17 +304,19 @@ button {
 
 
 
-@media  screen and (max-width:480px) {
+@media  screen and (max-width:530px) {
 
     /* Mostrar botão da navegação lateral */
     .nav .sidebar {
         left: 0;
     }
-    .nav .navbar {
+    .nav .navitens {
         display: none;
     }
     i#burguer {
-        display: block;
+        display: inline-block;
+        padding: 15px;
+        color: white;
     }
     
     .tittle {
