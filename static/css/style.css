@@ -300,14 +300,13 @@ button {
     background-color: blueviolet;
     border: 1px solid white;
     color: white;
-    width: 185px;
+    min-width: 185px;
 }
 
 
 button a {
     text-decoration: none;
     color: white;
-    padding: 10px;
 }
 
 
