@@ -36,22 +36,21 @@ body {
 .erro {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-content: center;
     width: 600px;
+    font-size: 2em;
+    background-color: white;
+    border-radius: 10px;
 }
 
 .mensagem_sucesso,
 .mensagem_erro {
     display: flex;
-    text-wrap: wrap;
     justify-content: center;
-    align-items: center;
     align-content: center;
-    color: white;
-    text-shadow: 1px 1px 1x black;
-    padding: 5px;
+    color: blueviolet;
+    padding: 10px;
     border-radius: 10px;
-    margin-bottom: 50px;
 }
 
 
@@ -80,7 +79,6 @@ body {
     background-color: rgba(137, 43, 226, 0.856);
     border-radius: 10px;
     transition: 0.5s;
-    padding: 10px;
 }
 
 /* Barra de navegação mobile */

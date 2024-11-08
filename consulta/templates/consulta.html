@@ -5,22 +5,18 @@
     {{messages.message}}
     {% comment %} Mensagem de erro {% endcomment %}
     {% if erro %}
-        <div class="container-flex">
-            <div class="row">
-                <div class="erro">
-                    <p class='mensagem_erro'>{{erro}}</p>
-                </div>
+        <div class="container">
+            <div class="erro">
+                <p class='mensagem_erro'>{{erro}}</p>
             </div>
         </div>
     {% endif %}
 
     {% comment %} Mensagem de sucesso {% endcomment %}
     {% if sucesso %}
-        <div class="container-flex">
-            <div class="row">
-                <div class="sucesso">
-                    <p class="mensagem_sucesso">{{sucesso}}</p>
-                </div>
+        <div class="container">
+            <div class="sucesso">
+                <p class="mensagem_sucesso">{{sucesso}}</p>
             </div>
         </div>
     {% endif %}
