@@ -297,13 +297,33 @@ i#burguer {
     width: 200px;
 }
 
-.container label {
-    text-align: center;
-
-}
 
 .container form {
     justify-content: center;
+}
+
+.label, .input-editar {
+    width: 100%;
+}
+/* }
+.input-editar {
+    max-width: 400px;
+} */
+
+.editar {
+    min-width: 400px;
+}
+
+.editar_reserva {
+    
+    justify-content: center;
+    align-content: center;
+    margin: auto;
+    text-align: center;
+}
+
+.text-reserva {
+    font-size: 2em;
 }
 
 .ip-link {
