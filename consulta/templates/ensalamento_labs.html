@@ -37,9 +37,9 @@
                                             </tr>
                                             {% for lab in labs_reservados %}
                                                 <tr class='lista_reservados'>
-                                                    <td class=' text'>{{lab.professor.nome}}</td>
-                                                    <td class=' lab text'>{{lab.laboratorio.nome}} {{lab.bloco}}{{lab.laboratorio.numero_sala}}</td>
-                                                    <td class=' text'>{{lab.periodo.nome_periodo}}</td>
+                                                    <td class='text'>{{lab.professor.nome}}</td>
+                                                    <td class='lab text'>{{lab.laboratorio.nome}} {{lab.bloco}}{{lab.laboratorio.numero_sala}}</td>
+                                                    <td class='text'>{{lab.periodo.nome_periodo}}</td>
                                                     <td id='acoes'>
                                                         <a class="icons" href="{% url  "reservas:editar_form"  lab.id %}"><i class="fa-regular fa-pen-to-square"></i></a>
                                                         <a class="icons" href="{% url "reservas:cancelar_form" lab.id %}"><i class="fa-regular fa-trash-can"></i></a>
