@@ -293,6 +293,14 @@ i#burguer {
     width: 200px;
 }
 
+.ip-link {
+    text-decoration: none;
+    margin: 5px;
+    padding-left: 5px;
+    color: white;
+    font: bold;
+}
+
 button {
     margin: 10px;
     border-radius: 10px;
