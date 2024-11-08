@@ -62,9 +62,10 @@ def registrarReservarLaboratorio(request):
         professor = professor.lower()
         professor = professor.title()
 
+        blocos = Blocos.objects.all()
         erro = "Favor preencher todos os campos"
+
         if bloco == "Selecione o Bloco" or data == "" or periodo == "Selecione o Periodo" or lab == "Selecione o Laboratório" or professor == "":
-            blocos = Blocos.objects.all()
             return render(request,'reserva_labs.html',{'object_list': blocos,
                                                         'erro' : erro })  
     
@@ -79,7 +80,7 @@ def registrarReservarLaboratorio(request):
             nome_lab = Laboratorios.objects.get(id=lab)
             str_periodo = Periodos.objects.get(id=periodo)
             erro = f'{nome_lab.nome} já está reservado no periodo {str_periodo} para data {data} '
-            return render(request, 'reserva_labs.html', {'blocos':blocos,
+            return render(request, 'reserva_labs.html', {'object_list':blocos,
                                                      'erro':erro})
         else:
             registrarReserva(lab, bloco, periodo, data, professor)
