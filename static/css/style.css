@@ -358,6 +358,7 @@ button a {
     justify-content: center;
     text-decoration: none;
     width: 100%;
+    color: white;
 }
 
 button a:hover {
