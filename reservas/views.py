@@ -50,7 +50,7 @@ def modules(request):
 
 
 def registrarReservarLaboratorio(request):
-    blocos = Blocos.objects.all()
+
     
     if request.method == 'POST':
         bloco = request.POST.get('blocos')
@@ -62,26 +62,11 @@ def registrarReservarLaboratorio(request):
         professor = professor.lower()
         professor = professor.title()
 
-        if bloco == 'Selecione o Bloco':
-            mensagem_erro = 'Favor preencher todos os campos'
-            return render(request,'reserva_labs.html',{'blocos': blocos,
-                                                        'mensagem_erro': mensagem_erro})
-        if data == "":
-            mensagem_erro = 'Favor preencher todos os campos'
-            return render(request,'reserva_labs.html',{'blocos': blocos,
-                                                        'mensagem_erro': mensagem_erro})
-        if periodo == 'Selecione o Periodo':
-            mensagem_erro = 'Favor preencher todos os campos'
-            return render(request,'reserva_labs.html',{'blocos': blocos,
-                                                        'mensagem_erro': mensagem_erro})
-        if lab == 'Selecione o Laboratório':
-            mensagem_erro = 'Favor preencher todos os campos'
-            return render(request,'reserva_labs.html',{'blocos': blocos,
-                                                        'mensagem_erro': mensagem_erro})
-        if professor == "":
-            mensagem_erro = 'Favor preencher todos os campos'
-            return render(request,'reserva_labs.html',{'blocos': blocos,
-                                                        'mensagem_erro': mensagem_erro})
+        erro = "Favor preencher todos os campos"
+        if bloco == "Selecione o Bloco" or data == "" or periodo == "Selecione o Periodo" or lab == "Selecione o Laboratório" or professor == "":
+            blocos = Blocos.objects.all()
+            return render(request,'reserva_labs.html',{'object_list': blocos,
+                                                        'erro' : erro })  
     
         
         if not Professores.objects.filter(nome=professor):
