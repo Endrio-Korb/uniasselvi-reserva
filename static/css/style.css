@@ -228,7 +228,7 @@ i#burguer {
 /* Faz uma bola que sobrepoe a barra da label para indicar qual lado está selecionado */
 .checkbox:checked + label::before,
 .checkbox:not(:checked) + label::before {
-    content: "<";
+    content: "";
     justify-content: center;
     align-items: center;
     align-content: center;
@@ -239,7 +239,7 @@ i#burguer {
     width: 36px;
     height: 36px;
     border-radius: 60%;
-    background-color: yellow;
+    background-color: white;
     z-index: 20;
     transition: 0.5s ease;
     font-size: 2em;
@@ -274,12 +274,19 @@ i#burguer {
     opacity: 100%;
 }
 
-.container {
+.sem-reserva {
+    min-height: 60vh;
+    text-align: center;
+}
+
+.container, .sem-reserva {
     width: min(800px, 90%);
     display: grid;
     justify-content: center;
+    align-content: center;
     margin: auto;
 }
+
 
 .container input, select {
     text-align: center;
@@ -328,8 +335,43 @@ button a {
     color: white;
 }
 
+.icons {
+    color: white;
+    padding: 5px;
+}
 
-@media  screen and (max-width:530px) {
+table, td, th {
+    border: 1px solid white;
+    border-collapse: collapse;
+    text-align: center;
+    padding: 10px;
+}
+
+table {
+    border-radius: 10px;
+}
+
+tr:nth-child(even) {
+    background-color: #4b13a3;
+}
+
+tr:nth-child(1) {
+    background-color: white;
+}
+
+tr:not(:first-child):hover {
+    background-color:  #7133d3;
+}
+
+
+.table-tittle {
+    font-size: 2em;
+    color: blueviolet;
+}
+
+
+
+@media  screen and (max-width:712px) {
 
     /* Mostrar botão da navegação lateral */
     .nav .sidebar {
