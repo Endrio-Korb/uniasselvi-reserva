@@ -100,13 +100,6 @@ def cancelar_reserva(request,id):
     blocos = Blocos.objects.all()
     return render(request, 'consulta.html', {'blocos':blocos})
 
-# class CancelarForm(GroupRequiredMixin, DeleteView):
-#     group_required = u'Funcionarios'
-#     model = ReservasLaboratorios
-#     context_object_name = 'reserva'
-#     template_name = 'cancelar.html'
-#     success_url = reverse_lazy('consulta:consulta')
-
 
 # Editar reserva do banco de dados
 def editar_form(request, id):
