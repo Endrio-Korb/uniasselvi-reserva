@@ -28,10 +28,6 @@ body {
     align-items: center;
 }
 
-.text-erro {
-    color:red;
-}
-
 .sucesso,
 .erro {
     display: flex;
@@ -45,9 +41,7 @@ body {
 
 .mensagem_sucesso,
 .mensagem_erro {
-    display: flex;
-    justify-content: center;
-    align-content: center;
+    text-align: center;
     color: blueviolet;
     padding: 10px;
     border-radius: 10px;
@@ -287,11 +281,20 @@ i#burguer {
     margin: auto;
 }
 
-.container input, label, select {
+.container input, select {
     text-align: center;
     padding: 5px;
     border-radius: 5px;
     width: 200px;
+}
+
+.container label {
+    text-align: center;
+
+}
+
+.container form {
+    justify-content: center;
 }
 
 .ip-link {
