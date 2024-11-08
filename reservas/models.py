@@ -35,6 +35,9 @@ class Laboratorios(models.Model):
 
     class Meta:
         db_table = "tb_laboratorios"
+
+    def __str__(self):
+        return f"{self.nome}"
     
 
 class ReservasLaboratorios(models.Model):
