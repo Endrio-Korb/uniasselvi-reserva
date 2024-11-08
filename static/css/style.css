@@ -77,7 +77,10 @@ body {
 }
 
 .nav .navitens li a:hover {
-    background-color: lightgray;
+    background-color: rgba(137, 43, 226, 0.856);
+    border-radius: 10px;
+    transition: 0.5s;
+    padding: 10px;
 }
 
 /* Barra de navegação mobile */
