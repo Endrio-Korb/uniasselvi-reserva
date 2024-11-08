@@ -8,8 +8,8 @@ app_name = "reservas"
 
 urlpatterns = [
     path('reservas/', ReservarLabs.as_view(), name='reserva_form'),    
-    re_path('<int:id>/cancelar', cancelar_form, name='cancelar_form'),
-    re_path('<int:id>/cancelar_reserva', cancelar_reserva, name="cancelar_reserva"),
+    path('<int:id>/cancelar', cancelar_form, name='cancelar_form'),
+    path('<int:id>/cancelar_reserva', cancelar_reserva, name="cancelar_reserva"),
 
     
     path('', registrarReservarLaboratorio, name='registrar_reserva'),
@@ -17,7 +17,7 @@ urlpatterns = [
     path('editar_modules/', editar_modules, name='editar_modules'),
 
     #path('<int:pk>/editar', Editar.as_view(), name='editar'),
-    re_path('<int:id>/editar_form', editar_form, name='editar_form'),
-    re_path('<int:id>/editar', editar, name='editar'),
+    path("<int:id>/editar_form", editar_form, name='editar_form'),
+    path("<int:id>/editar", editar, name='editar'),
 ]
 

@@ -110,7 +110,7 @@ def cancelar_reserva(request,id):
 # Editar reserva do banco de dados
 def editar_form(request, id):
     usuario = request.user
-   # id = pk
+
     if usuario.groups.filter(name='Funcionarios').exists():
         blocos = Blocos.objects.all()
         reserva = ReservasLaboratorios.objects.get(id=id)
