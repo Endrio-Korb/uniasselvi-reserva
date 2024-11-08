@@ -274,17 +274,19 @@ i#burguer {
     opacity: 100%;
 }
 
-.sem-reserva {
+.reservas {
     min-height: 60vh;
     text-align: center;
+    align-content: center;
 }
 
-.container, .sem-reserva {
+.container, .reserva {
     width: min(800px, 90%);
     display: grid;
     justify-content: center;
     align-content: center;
     margin: auto;
+    text-align: center;
 }
 
 
@@ -331,8 +333,15 @@ button:hover {
 
 
 button a {
+    display: flex;
+    padding: 0px;
+    justify-content: center;
     text-decoration: none;
-    color: white;
+    width: 100%;
+}
+
+button a:hover {
+    color: blueviolet;
 }
 
 .icons {
