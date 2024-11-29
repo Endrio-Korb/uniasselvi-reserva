@@ -3,23 +3,20 @@
 
 {% block content %}
 
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <form method="post">
-                    {% csrf_token %}
-                
-                    <p class='text text-center'>Você tem certeza que quer cancelar:</p>
-                    <p class='text text-center'>{{reserva.laboratorio.nome}} {{laboratorio.bloco}}{{labotorio.numero_sala}}</p>
-                    <p class='text text-center'> do {{reserva.professor}}
-                    <p class="text text-center"> do dia  {{reserva.data_reserva}}</p>
-                    <p class="text text-center"> no periodo {{reserva.periodo}}? </p>
+    <div class="container reservas">
+        <form method="post">
+            {% csrf_token %}
+        
+            <p class='text'>Você tem certeza que quer cancelar:</p>
+            <p class='text'>Laboratório: {{reserva.laboratorio.nome}} {{laboratorio.bloco}}{{labotorio.numero_sala}}</p>
+            <p class='text'>Professor: {{reserva.professor}}
+            <p class="text">Data: {{reserva.data_reserva}}</p>
+            <p class="text">Periodo: {{reserva.periodo}} </p>
 
-                    <a class="btn text text-center" href="{% url "reservas:cancelar_reserva" reserva.id %}">Cancelar</a>
-                </form>
-
-            </div>
-        </div>
+           <button>
+               <a class="text" href="{% url "reservas:cancelar_reserva" reserva.id %}">Cancelar</a>
+           </button>
+        </form>
     </div>
 
  

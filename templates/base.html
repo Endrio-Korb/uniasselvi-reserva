@@ -17,7 +17,7 @@
 
   {% comment %} Barra de navegação {% endcomment %}
   <nav class="nav">
-    <ul class="navbar">
+    <ul class="navitens">
       {% comment %} Link para reserva do laboratórios {% endcomment %}
       {% if request.user.groups.all.0.name == 'Funcionarios' %}
         <li>

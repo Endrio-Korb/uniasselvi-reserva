@@ -2,62 +2,62 @@
 {% load static %}
 
 {% block content %}
-    {{messages.message}}
     {% comment %} Mensagem de erro {% endcomment %}
     {% if erro %}
-        <div class="container-flex">
-            <div class="row">
-                <div class="erro">
-                    <p class='mensagem_erro'>{{erro}}</p>
-                </div>
+        <div class="container">
+            <div class="erro">
+                <p class='mensagem_erro'>{{erro}}</p>
             </div>
         </div>
     {% endif %}
 
     {% comment %} Mensagem de sucesso {% endcomment %}
     {% if sucesso %}
-        <div class="container-flex">
-            <div class="row">
-                <div class="sucesso">
-                    <p class="mensagem_sucesso">{{sucesso}}</p>
-                </div>
+        <div class="container">
+            <div class="sucesso">
+                <p class="mensagem_sucesso">{{sucesso}}</p>
             </div>
         </div>
     {% endif %}
 
     {% comment %} Consulta ensalamento por bloco e data{% endcomment %}
     <section>
-        <div class="container-flex-column">
-            <h1 class="tittle text-center">Consulta por Bloco</h1>
-            <form action="{% url 'consulta:ensalamento_labs' %}" method="POST"> {% csrf_token %}
-                <div class="container">
-                     <label class='text text-center' for="data">Selecione a data</label>
-                    <input class="input" type="date" id='data' name="data" placeholder='Selecione a data'>
-                    <label class='text text-center' for="bloco1">Selecione o bloco</label>
-                    <select id='bloco1' class="input" name="bloco" >
-                        <option Selected>Selecione o Bloco</option>
-                        {% for bloco in blocos %}
-                        <option value="{{bloco.id_bloco}}">{{bloco.bloco}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <button type='submit' class='btn'>Consultar</button>
-            </form>  
+        <div class="container">
+            <h1 class="tittle">Consulta por Bloco</h1>
         </div>
+        <form action="{% url 'consulta:ensalamento_labs' %}" method="POST"> {% csrf_token %}
+            <div class="container">
+                <label class="text" for="data">Selecione a data</label>
+                <input class="input" type="date" id='data' name="data">
+            </div>
+            <div class="container">
+                <label class="text" for="bloco1">Selecione o bloco</label>
+                <select id='bloco1' class="input" name="bloco" >
+                    <option Selected>Selecione o Bloco</option>
+                    {% for bloco in blocos %}
+                    <option value="{{bloco.id_bloco}}">{{bloco.bloco}}</option>
+                    {% endfor %}
+                </select>
+                <button type='submit' class='btn'>Consultar</button>
+            </div>
+        </form>  
     </section>
 
     {% comment %} Consulta por nome do professor e data{% endcomment %}
     <section>
-        <div class="container-flex-column">
-            <h1 class="tittle text-center">Consulta por Nome do Professor</h1>
+        <div class="container">
+            <h1 class="tittle">Consulta por Nome do Professor</h1>
+        </div>
             <form action="{% url "consulta:ensalamento_labs_nome" %}" method='POST'> {% csrf_token %}
                 <div class="container">
-                    <label class='text text-center' for="nome">Digite o nome do professor</label>
-                    <input class="input" type="text" id="nome" name='nome_professor' placeholder='Digite o nome do professor'>
-                    <label class='text text-center' for="data2">Selecione a data</label>
-                    <input class="input" id="data2" type="date" name="data">
+                    <label class="text" for="nome">Nome do Professor</label>
+                    <input class="input" type="text" id="nome" name='nome_professor' placeholder='Nome do Professor'>
                 </div>
-                <button type='submit' class="btn">Consultar</button>
+                <div class="container">
+                    <label class="text" for="data2">Selecione a data</label>
+                    <input class="input" id="data2" type="date" name="data">
+                    <button type='submit' class="btn">Consultar</button>
+                </div>
             </form>
         </div>
 </section>

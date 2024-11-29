@@ -5,7 +5,7 @@ from professores.models import Professores
 from django.contrib.auth.models import User, Group
 
 from django.contrib.auth.decorators import user_passes_test
-from django.shortcuts import render, get_object_or_404, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render,redirect, get_object_or_404, HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 
 from django.contrib.auth.decorators import login_required, permission_required
@@ -50,7 +50,7 @@ def modules(request):
 
 
 def registrarReservarLaboratorio(request):
-    blocos = Blocos.objects.all()
+
     
     if request.method == 'POST':
         bloco = request.POST.get('blocos')
@@ -62,26 +62,12 @@ def registrarReservarLaboratorio(request):
         professor = professor.lower()
         professor = professor.title()
 
-        if bloco == 'Selecione o Bloco':
-            mensagem_erro = 'Favor preencher todos os campos'
-            return render(request,'reserva_labs.html',{'blocos': blocos,
-                                                        'mensagem_erro': mensagem_erro})
-        if data == "":
-            mensagem_erro = 'Favor preencher todos os campos'
-            return render(request,'reserva_labs.html',{'blocos': blocos,
-                                                        'mensagem_erro': mensagem_erro})
-        if periodo == 'Selecione o Periodo':
-            mensagem_erro = 'Favor preencher todos os campos'
-            return render(request,'reserva_labs.html',{'blocos': blocos,
-                                                        'mensagem_erro': mensagem_erro})
-        if lab == 'Selecione o Laboratório':
-            mensagem_erro = 'Favor preencher todos os campos'
-            return render(request,'reserva_labs.html',{'blocos': blocos,
-                                                        'mensagem_erro': mensagem_erro})
-        if professor == "":
-            mensagem_erro = 'Favor preencher todos os campos'
-            return render(request,'reserva_labs.html',{'blocos': blocos,
-                                                        'mensagem_erro': mensagem_erro})
+        blocos = Blocos.objects.all()
+        erro = "Favor preencher todos os campos"
+
+        if bloco == "Selecione o Bloco" or data == "" or periodo == "Selecione o Periodo" or lab == "Selecione o Laboratório" or professor == "":
+            return render(request,'reserva_labs.html',{'object_list': blocos,
+                                                        'erro' : erro })  
     
         
         if not Professores.objects.filter(nome=professor):
@@ -94,7 +80,7 @@ def registrarReservarLaboratorio(request):
             nome_lab = Laboratorios.objects.get(id=lab)
             str_periodo = Periodos.objects.get(id=periodo)
             erro = f'{nome_lab.nome} já está reservado no periodo {str_periodo} para data {data} '
-            return render(request, 'reserva_labs.html', {'blocos':blocos,
+            return render(request, 'reserva_labs.html', {'object_list':blocos,
                                                      'erro':erro})
         else:
             registrarReserva(lab, bloco, periodo, data, professor)
@@ -114,18 +100,11 @@ def cancelar_reserva(request,id):
     blocos = Blocos.objects.all()
     return render(request, 'consulta.html', {'blocos':blocos})
 
-# class CancelarForm(GroupRequiredMixin, DeleteView):
-#     group_required = u'Funcionarios'
-#     model = ReservasLaboratorios
-#     context_object_name = 'reserva'
-#     template_name = 'cancelar.html'
-#     success_url = reverse_lazy('consulta:consulta')
-
 
 # Editar reserva do banco de dados
 def editar_form(request, id):
     usuario = request.user
-   # id = pk
+
     if usuario.groups.filter(name='Funcionarios').exists():
         blocos = Blocos.objects.all()
         reserva = ReservasLaboratorios.objects.get(id=id)
@@ -148,38 +127,53 @@ def editar_modules(request):
 
 
 def editar(request, id):
+
+    # if id == "Selecione o Laboratório":
     
     if request.method == 'POST':
-        professor = request.POST.get('professor')
 
-        data = request.POST.get('data')
-        periodo = request.POST.get('periodo')
-        lab = request.POST.get('lab')
-        bloco = request.POST.get('blocos')
+        try:
+            professor = request.POST.get('professor')
 
-        blocos = Blocos.objects.all()
+            data = request.POST.get('data')
+            periodo = request.POST.get('periodo')
+            lab = request.POST.get('lab')
+            bloco = request.POST.get('blocos')
 
-        if verificarReserva(lab, bloco, periodo, data):
+            blocos = Blocos.objects.all()
+
             if verificarReserva(lab, bloco, periodo, data):
-                #id = pk
-                nome_lab = Laboratorios.objects.get(id=lab)
-                str_periodo = Periodos.objects.get(id=periodo)
-                erro = f'{nome_lab.nome} já está reservado no periodo {str_periodo} para data {data} '
-                return render(request, 'editar_form.html', {'blocos':blocos, 'id':id,
-                                                        'erro':erro})
-        else:
-            if not Professores.objects.filter(nome=professor):
-                salva_nome_professor = Professores.objects.create(
-                nome = f'{professor}')
-                salva_nome_professor.save()
+                if verificarReserva(lab, bloco, periodo, data):
+                    nome_lab = Laboratorios.objects.get(id=lab)
+                    str_periodo = Periodos.objects.get(id=periodo)
+                    erro = f'{nome_lab.nome} já está reservado no periodo {str_periodo} para data {data} '
+                    return render(request, 'editar_form.html', {'blocos':blocos, 'id':id,
+                                                            'erro':erro})
+            else:
+                if not Professores.objects.filter(nome=professor):
+                    salva_nome_professor = Professores.objects.create(
+                    nome = f'{professor}')
+                    salva_nome_professor.save()
 
-            ReservasLaboratorios.objects.filter(id=id).update(data_reserva=data,
-                                                            periodo_id = Periodos.objects.get(id_periodo=periodo),
-                                                            laboratorio = Laboratorios.objects.get(id=lab),
-                                                            bloco_id = Blocos.objects.get(id_bloco=bloco),
-                                                            professor_id = Professores.objects.get(nome=professor)
-            )
+                ReservasLaboratorios.objects.filter(id=id).update(data_reserva=data,
+                                                                periodo_id = Periodos.objects.get(id_periodo=periodo),
+                                                                laboratorio = Laboratorios.objects.get(id=lab),
+                                                                bloco_id = Blocos.objects.get(id_bloco=bloco),
+                                                                professor_id = Professores.objects.get(nome=professor),
 
-        sucesso = "Reserva atualizada com sucesso"
-        return render(request, 'consulta.html', {'sucesso':sucesso, 'blocos': blocos})
+                )
+                sucesso = "Reserva atualizada com sucesso"
+                return render(request, 'consulta.html', {'sucesso':sucesso, 'blocos': blocos})
+        except ValueError:
+                blocos = Blocos.objects.all()
+                erro = "Favor preencher todos os campos"
+                usuario = request.user
+
+                if usuario.groups.filter(name='Funcionarios').exists():
+                    blocos = Blocos.objects.all()
+                    reserva = ReservasLaboratorios.objects.get(id=id)
+                    context =  {'reserva':reserva, 'id': id, 'blocos':blocos, "erro": erro}
+                    return render(request, 'editar_form.html',context)
+                else:
+                    return render(request,'editar_form.html', {'id':id})
         
